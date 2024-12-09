@@ -1,0 +1,42 @@
+
+#butler
+
+sudo i2cdetect -y 1
+
+list 12c devices
+
+sudo apt-get install python-urllib3
+
+process.py needs some work.
+exists on butler-130-137
+clear - out160-167
+blue 150-157
+NAS 90-94 (wtf??)
+zero 140
+shed temp60+61 (not in use) and out60-62
+keypad out110-124 and a nice version of process.pl
+garagepink 100-107 
+
+
+
+is elecmeter different or clash?
+
+
+
+#blue (old?)
+more /etc/dhcpcd.conf 
+
+static config
+
+interface eth0
+static ip_address=192.168.100.105/24
+#static ip6_address=fd51:42f8:caae:d92e::ff/64
+static routers=192.168.100.1
+static domain_name_servers=208.67.222.222 208.67.220.220 8.8.8.8
+
+
+
+systemctl enable dnsmasq    #start on reboot? 22/9/20 
+
+
+/var/lib/misc/dnsmasq.leases   contains lease information 
