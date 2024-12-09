@@ -49,23 +49,32 @@ then array=( "process.pl" "logic.pl" "vitals.bash" "heatmon.pl")
 fi
 
 #SHED
-array=( "process.pl" "temps.pl" "vitals.bash" )
+if  [ `hostname` == "shed" ] ;
+then array=( "process.pl" "temps.pl" "vitals.bash" )
 
 #PI ZERO
-array=( "process.pl" "vitals.bash" "temps.pl" )
+if  [ `hostname` == "pizero" ] ;
+then array=( "process.pl" "vitals.bash" "temps.pl" )
 
 # SOLAR
-array=( "vitals.bash" "temps.pl" "elec_meter.py" "update_meter.bash" )
+if  [ `hostname` == "solar" ] ;
+then array=( "vitals.bash" "temps.pl" "elec_meter.py" "update_meter.bash" )
+fi
 
 #KEYPAD
-array=( "vitals.bash" "process.pl" "python_keypad.py" )
+if  [ `hostname` == "keypad" ] ;
+then array=( "vitals.bash" "process.pl" "python_keypad.py" )
+fi
 
 #GARAGEPINK
-array=( "process.pl" "vitals.bash" "arduino_www.bash" )
+if  [ `hostname` == "garagepink" ] ;
+then array=( "process.pl" "vitals.bash" "arduino_www.bash" )
+fi
 
 #SMSHOST - - - GARAGEPI
-array=( "process_sms.pl" )
-
+if  [ `hostname` == "smshost" ] ;
+then array=( "process_sms.pl" )
+fi
 
 
 #DNShost?
