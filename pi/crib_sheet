@@ -40,3 +40,11 @@ systemctl enable dnsmasq    #start on reboot? 22/9/20
 
 
 /var/lib/misc/dnsmasq.leases   contains lease information 
+
+
+
+#SDCARD IMAGING
+
+to write out - sudo dd if=/dev/sdc | gzip > /media/alan/NVME/Pi_OS/sdcard.img.gz
+
+to write back to the card - sudo su - (then) - cat /media/alan/NVME/Pi_OS/sdcard.img.gz | gunzip | dd of=/dev/sdc
