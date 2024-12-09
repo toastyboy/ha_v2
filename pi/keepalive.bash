@@ -51,10 +51,12 @@ fi
 #SHED
 if  [ `hostname` == "shed" ] ;
 then array=( "process.pl" "temps.pl" "vitals.bash" )
+fi
 
 #PI ZERO
 if  [ `hostname` == "pizero" ] ;
 then array=( "process.pl" "vitals.bash" "temps.pl" )
+fi
 
 # SOLAR
 if  [ `hostname` == "solar" ] ;
