@@ -16,24 +16,21 @@
 
 use Device::SerialPort ;
 
-$inc_up = 5 ;
-$inc_down = 5 ;
+$inc_up        = 5 ;
+$inc_down      = 5 ;
 $min_intensity = 70 ;
-$url = "http://varhost/varshare" ;
-$epoch = time() ;
-
-
-# foreach (sort keys %myhash) {
-# print "$_ : $myhash{$_}\n";
-# }
-# print "out08  $hash{out08} \n";
+$url           = "http://varhost/varshare" ;
+$epoch         = time() ;
 
 
 #Set up serial port
 $port = Device::SerialPort->new("/dev/ttyAMA0") ;
-$port->baudrate(9600) ;    $port->parity("none") ;
-$port->handshake("none") ; $port->databits(8) ;
-$port->stopbits(1) ;       $port->read_char_time(0) ;
+$port->baudrate(9600) ;    
+$port->parity("none") ;
+$port->handshake("none") ; 
+$port->databits(8) ;
+$port->stopbits(1) ;       
+$port->read_char_time(0) ;
 $port->read_const_time(1) ;
 
 
@@ -43,7 +40,8 @@ $port->read_const_time(1) ;
 # setvals (var_name) - will compare the value of $var_name with the centrally
 # stored value $hash{$var_name}[0] and if different will write is back to the
 # repository via http
-#
+### Could improve this by pulling back all the DMX values as a one-er, rather than make 24/28/32 requests
+### In fact could just pull all results (for all vals) into an array at the start - probably more efficient?
 sub setvals {
   $varname = $_[0] ;
   $epoch = time() ;
