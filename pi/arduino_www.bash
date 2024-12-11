@@ -1,5 +1,14 @@
 #!/bin/bash
 
+####
+#Description
+#
+#This code connects to an arduino uno via USB to pull status messages from it
+#The messages are temperature in the garden, humidity and a fire sensor
+#
+# The arduino is running 
+####
+
 ###########################
 #FUNCTIONS
 #########
