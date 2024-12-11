@@ -117,16 +117,16 @@ function pings {
 while true
 do
 
-inits
-maindisk
-#usb1
-#usb2
-uptimes
-temps
-networks
-loadav
-processes
-pings
+  inits
+  maindisk
+  #usb1
+  #usb2
+  uptimes
+  temps
+  networks
+  loadav
+  processes
+  pings
 
-sleep 300
+  sleep 300
 done
