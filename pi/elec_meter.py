@@ -82,7 +82,9 @@ def my_callback(channel):
     global my_list
     global day_meter
 
-    day_meter = day_meter + 0.001
+    #This is economy seven stuff, 00:30 - 07:30 GMT
+    #meaning 1:30am - 8:30am during the summer (BST) - code doesn't allow for that.
+    day_meter = day_meter + 0.001  # every pulse add 0.001kwh i.e a watt-hour
     nw = datetime.now()
     hrs = nw.hour;mins = nw.minute;
     if myhost == "solar":
@@ -102,18 +104,22 @@ def my_callback(channel):
     my_list.insert(0,millis) # insert into the bottom 
     #print (my_list)
 
-
+    # NOT SURE WE NEED THESE ANYMORE
+    # For the 5 second reading, upon pulse detection look back 5 seconds in the array/list
+    # and count how many pulses there have been
     target = millis - 5000
     fivesec = sum(i > target for i in my_list) 
     fivesec = fivesec * 12 * 60 / ( 1000 * 1.0 ) 
     #print (fivesec)
 
-
+    #  Same as for 5 sec reading, just for 3600 secs
     target = millis - 3600000
     onehour = sum(i > target for i in my_list)
     onehour = onehour / ( 1000 * 1.0 )
     #print (onehour)
 
+    # do we update these every pulse or every 5 secs?  probably 5 secs is better?
+    # or is this genius?  I.e we aren't updating solar all night when nothing is happening?
     if meter_read  >= 1:
       if myhost == "clear":
         text_file = open("elec_meter/con_meter_read.txt", "w")
@@ -128,7 +134,6 @@ def my_callback(channel):
         fileval = str(meter_read_o)
         text_file.write( fileval )
         text_file.close()
-
 
     if myhost == "clear":
       text_file = open("elec_meter/con_day_meter.txt", "w")
@@ -148,12 +153,14 @@ while True:
     dessize = sum(i > target for i in my_list)
     del my_list[dessize:]  
 
+    # If the list gets empty, just return an instant rate of 0
+    # i.e there have been no pulses in an hour
     if ( len(my_list) > 3 ):
       first = my_list[0]
       second = my_list[3]
-      instant = ( 3600000 / ( first - second ) ) / ( 333 * 1.0 )
-      instant2 = ( 3600000 / ( millis - first ) ) / ( 1000 * 1.0 )
-      if ( instant2 < instant ):
+      instant = ( 3600000 / ( first - second ) ) / ( 333 * 1.0 )  # this is clever, this one is time between last two recorded pulses
+      instant2 = ( 3600000 / ( millis - first ) ) / ( 1000 * 1.0 ) # this is time between last pulse and now...
+      if ( instant2 < instant ):   # compare the two and chose the lower, or else a high rate can remain if no further pulses
         instant=instant2 
     else:
       instant = 0
