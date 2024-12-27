@@ -78,6 +78,9 @@ if  [ `hostname` == "smshost" ] ;
 then array=( "process_sms.pl" )
 fi
 
+if  [ `hostname` == "testpi" ] ;
+then exit ; array=( "")
+fi
 
 #DNShost?
 
