@@ -50,6 +50,6 @@ to write out - sudo dd if=/dev/sdc | gzip > /media/alan/NVME/Pi_OS/sdcard.img.gz
 
 to write back to the card:
 1) sudo su 
-2) dd if=/dev/zero of=/dev/sdc bs=4096 # blank sdcard
+2) dd if=/dev/zero of=/dev/sdc bs=4096  status=progress  # blank sdcard
 3) umount /dev/sdc
 4) cat /media/alan/NVME/Pi_OS/sdcard.img.gz | gunzip | dd of=/dev/sdc   (takes a while, 30 mins?)
