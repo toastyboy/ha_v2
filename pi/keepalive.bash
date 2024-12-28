@@ -8,6 +8,15 @@ url="http://varhost/varshare/"
 
 ./pingreboot.bash
 
+###Run these scripts periodically
+
+timemins=`date +%M`
+timehrs=`date +%H`
+
+if [ $timehrs == 0 ] && [ $timemins == 0 ]
+  then cd /home/pi/setup/gitscripts/ ; ./gitupdate.bash
+       cd /home/pi/ha_v2/pi/ ; cp -R * /home/pi/
+fi 
 
 ### scripts to monitor for
 
