@@ -50,36 +50,40 @@ table {
 <?php
 $oncol="active";
 $offcol="";
-$offval = 0 ;
+$offval = 0;
 
-$vdival = 70 ;
-$dimval = 100 ;
-$midval = 150 ;
-$brival = 180 ;
-$fulval = 250 ;
+$vdival = 70;
+$dimval = 100;
+$midval = 150;
+$brival = 180;
+$fulval = 250;
 
-$html = file_get_contents('http://varhost/varshare/varshow.php');
+$html = @file_get_contents('http://varhost/varshare/varshow.php') ?: '';
 $html = preg_replace("/[^A-Za-z0-9<>|_.]/", "", $html);
 $list = explode("<br>",$html);
 array_pop($list);
 
+$hash = [];
+
 foreach($list AS $data) {
     $data = rtrim($data);
     $array = preg_split("/\|\|/",$data);
+    if (count($array) < 2) continue;
+
     $vals = preg_split("/\|/",$array[1]);
     $hash[$array[0]] = $vals[0];
 }
 
-$gtemp = $hash["temp52"];
+$gtemp = isset($hash["temp52"]) ? $hash["temp52"] : "--";
 
-/* ✅ FIXED FORM LINE */
+/* ✅ CORRECT FORM */
 echo '<form action="new_proc.php" method="POST">';
 echo '<table>';
 
 function lightbuttons($dmxnum,$location){
   global $fulval,$brival,$midval,$dimval,$vdival,$offval,$oncol,$offcol,$hash;
 
-  $curval = rtrim($hash["dmx$dmxnum"]);
+  $curval = isset($hash["dmx$dmxnum"]) ? rtrim($hash["dmx$dmxnum"]) : 0;
 
   $state = ["off"=>$offcol,"vdi"=>$offcol,"dim"=>$offcol,"mid"=>$offcol,"bri"=>$offcol,"ful"=>$offcol];
 
@@ -105,8 +109,10 @@ function lightbuttons($dmxnum,$location){
 function buttons($pokenum,$location){
   global $oncol,$offcol,$hash;
 
-  $curval = rtrim($hash["out$pokenum"]);
-  $off=$offcol; $on=$offcol;
+  $curval = isset($hash["out$pokenum"]) ? rtrim($hash["out$pokenum"]) : 0;
+
+  $off=$offcol; 
+  $on=$offcol;
 
   if ($curval=="1") $on=$oncol;
   else $off=$oncol;
@@ -138,7 +144,8 @@ foreach(["off","morning","evening","night"] as $t){
 }
 echo "</tr>";
 
-echo "</table></form>";
+echo "</table>";
+echo "</form>";
 
 /* Navigation */
 echo "<br><table><tr>";
@@ -150,7 +157,7 @@ foreach([
 "landing.php"=>"Landing",
 "toplanding.php"=>"Top Landing"
 ] as $link=>$name){
-    echo "<td><button class='navbtn' onclick=\"location.href='$2px;'>Temperature: $gtemp °C</p>";
+    echo "<td><button class='navbtn' onclick=\"locationt-size:22px;'>Temperature: $gtemp °C</p>";
 ?>
 
 </body>
