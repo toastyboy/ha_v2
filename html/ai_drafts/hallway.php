@@ -14,11 +14,6 @@ table {
     border-collapse:collapse;
 }
 
-h1 {
-    font-size:28px;
-    margin:10px 0;
-}
-
 .section {
     font-size:26px;
     padding:10px 0;
@@ -77,6 +72,7 @@ foreach($list AS $data) {
 
 $gtemp = $hash["temp52"];
 
+/* ✅ FIXED FORM LINE */
 echo '<form action="new_proc.php" method="POST">';
 echo '<table>';
 
@@ -94,7 +90,7 @@ function lightbuttons($dmxnum,$location){
   elseif ($curval >= $vdival) $state["vdi"]=$oncol;
   else $state["off"]=$oncol;
 
-  echo "<tr><td class='section' colspan='7'>$location</td></tr><tr>";
+  echo "<tr><td class='section' colspan='6'>$location</td></tr><tr>";
 
   echo "<td><button class='btn {$state['off']}' name='dmx$dmxnum' value='$offval'>Off</button></td>";
   echo "<td><button class='btn {$state['vdi']}' name='dmx$dmxnum' value='$vdival'>VDim</button></td>";
@@ -115,7 +111,7 @@ function buttons($pokenum,$location){
   if ($curval=="1") $on=$oncol;
   else $off=$oncol;
 
-  echo "<tr><td class='section' colspan='3'>$location</td></tr><tr>";
+  echo "<tr><td class='section' colspan='2'>$location</td></tr><tr>";
 
   echo "<td><button class='btn $off' name='out$pokenum' value='0'>Off</button></td>";
   echo "<td><button class='btn $on' name='out$pokenum' value='1'>On</button></td>";
@@ -136,7 +132,7 @@ buttons("201","Cellar");
 buttons("5","Heating");
 
 /* Themes */
-echo "<tr><td class='section' colspan='5'>Themes</td></tr><tr>";
+echo "<tr><td class='section' colspan='4'>Themes</td></tr><tr>";
 foreach(["off","morning","evening","night"] as $t){
     echo "<td><button class='btn' name='theme' value='$t'>$t</button></td>";
 }
@@ -159,4 +155,3 @@ foreach([
 
 </body>
 </html>
-``
