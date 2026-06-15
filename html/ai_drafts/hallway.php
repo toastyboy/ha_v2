@@ -1,85 +1,93 @@
 
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="refresh" content="30">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Panel</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f0f0f0;
+}
+
+/* Header */
+.header {
+    background:#333;
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    font-size:24px;
+}
+
+/* Grid layout */
+.grid {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:12px;
+    padding:12px;
+}
+
+/* Tiles */
+.tile {
+    background:#fff;
+    border-radius:16px;
+    height:120px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    border:2px solid #ccc;
+}
+
+/* Active state */
+.tile.active {
+    background:#444;
+    color:#fff;
+}
+
+/* Footer nav */
+.footer {
+    position:fixed;
+    bottom:0;
+    width:100%;
+    display:flex;
+}
+
+.navbtn {
+    flex:1;
+    padding:15px;
+    font-size:18px;
+    border:none;
+    background:#ddd;
+}
+</style>
 </head>
 
-<body style="background-color:#999966">
+<body>
 
-<?php
-$oncol="#555511";
-$offcol="#999933";
+<div class="header">Home Control</div>
 
-$offval = 0;
-$vdival = 70;
-$dimval = 100;
-$midval = 150;
-$brival = 180;
-$fulval = 250;
+<div class="grid">
 
-$html = @file_get_contents('http://varhost/varshare/varshow.php') ?: '';
-$html = preg_replace("/[^A-Za-z0-9<>|_.]/", "", $html);
+<div class="tile active">Living Room<br>On</div>
+<div class="tile">Kitchen<br>Off</div>
 
-$list = explode("<br>",$html);
-array_pop($list);
+<div class="tile">Bedroom<br>Dim</div>
+<div class="tile active">Hallway<br>On</div>
 
-$hash = [];
+<div class="tile">Heating<br>Off</div>
+<div class="tile active">Porch<br>On</div>
 
-foreach($list AS $data) {
-    $array = preg_split("/\|\|/",$data);
-    if (count($array) < 2) continue;
+</div>
 
-    $vals = preg_split("/\|/",$array[1]);
-    $hash[$array[0]] = $vals[0];
-}
-
-$gtemp = isset($hash["temp52"]) ? $hash["temp52"] : "--";
-
-/* ✅ CORRECT FORM START */
-echo 'new_proc.php';
-echo '<table border="0">';
-
-function lightbuttons($dmxnum,$location){
-  global $fulval,$brival,$midval,$dimval,$vdival,$offval,$oncol,$offcol,$hash;
-
-  $curval = isset($hash["dmx$dmxnum"]) ? $hash["dmx$dmxnum"] : 0;
-
-  echo "<tr><td><h2>$location</h2></td>";
-
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$offval'>Off</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$vdival'>VDim</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$dimval'>Dim</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$midval'>Mid</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$brival'>Bright</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$fulval'>Full</button></td>";
-
-  echo "</tr>";
-}
-
-function buttons($pokenum,$location){
-  global $oncol,$offcol,$hash;
-
-  echo "<tr><td><h2>$location</h2></td>";
-
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='out$pokenum' value='0'>Off</button></td>";
-  echo "<td><button style='background:$offcol;width:100px;height:80px' name='out$pokenum' value='1'>On</button></td>";
-
-  echo "</tr>";
-}
-
-/* Devices */
-lightbuttons("3","Front Porch");
-lightbuttons("5","Hallway");
-
-buttons("201","Cellar");
-
-/* ✅ CLOSE FORM PROPERLY */
-echo "</table>";
-echo "</form>";
-
-echo "Temp: $gtemp °C";
-
-?>
+<div class="footer">
+<button class="navbtn">Home</button>
+<button class="navbtn">Rooms</button>
+<button class="navbtn">Settings</button>
+</div>
 
 </body>
 </html>
