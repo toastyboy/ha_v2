@@ -2,56 +2,15 @@
 <html>
 <head>
 <meta http-equiv="refresh" content="30">
-<style>
-body {
-    background:#f2f2f2;
-    font-family: sans-serif;
-    color:#000;
-}
-
-table {
-    width:100%;
-    border-collapse:collapse;
-}
-
-.section {
-    font-size:26px;
-    padding:10px 0;
-    border-bottom:2px solid #ccc;
-}
-
-.btn {
-    width:110px;
-    height:80px;
-    font-size:22px;
-    border-radius:12px;
-    border:2px solid #333;
-    background:#ddd;
-}
-
-.navbtn {
-    width:180px;
-    height:90px;
-    font-size:24px;
-    border-radius:12px;
-    border:2px solid #333;
-    background:#ddd;
-}
-
-.active {
-    background:#666;
-    color:#fff;
-}
-</style>
 </head>
 
-<body>
+<body style="background-color:#999966">
 
 <?php
-$oncol="active";
-$offcol="";
-$offval = 0;
+$oncol="#555511";
+$offcol="#999933";
 
+$offval = 0;
 $vdival = 70;
 $dimval = 100;
 $midval = 150;
@@ -60,13 +19,13 @@ $fulval = 250;
 
 $html = @file_get_contents('http://varhost/varshare/varshow.php') ?: '';
 $html = preg_replace("/[^A-Za-z0-9<>|_.]/", "", $html);
+
 $list = explode("<br>",$html);
 array_pop($list);
 
 $hash = [];
 
 foreach($list AS $data) {
-    $data = rtrim($data);
     $array = preg_split("/\|\|/",$data);
     if (count($array) < 2) continue;
 
@@ -76,32 +35,23 @@ foreach($list AS $data) {
 
 $gtemp = isset($hash["temp52"]) ? $hash["temp52"] : "--";
 
-/* ✅ CORRECT FORM */
-echo '<form action="new_proc.php" method="POST">';
-echo '<table>';
+/* ✅ CORRECT FORM START */
+echo 'new_proc.php';
+echo '<table border="0">';
 
 function lightbuttons($dmxnum,$location){
   global $fulval,$brival,$midval,$dimval,$vdival,$offval,$oncol,$offcol,$hash;
 
-  $curval = isset($hash["dmx$dmxnum"]) ? rtrim($hash["dmx$dmxnum"]) : 0;
+  $curval = isset($hash["dmx$dmxnum"]) ? $hash["dmx$dmxnum"] : 0;
 
-  $state = ["off"=>$offcol,"vdi"=>$offcol,"dim"=>$offcol,"mid"=>$offcol,"bri"=>$offcol,"ful"=>$offcol];
+  echo "<tr><td><h2>$location</h2></td>";
 
-  if ($curval >= $fulval) $state["ful"]=$oncol;
-  elseif ($curval >= $brival) $state["bri"]=$oncol;
-  elseif ($curval >= $midval) $state["mid"]=$oncol;
-  elseif ($curval >= $dimval) $state["dim"]=$oncol;
-  elseif ($curval >= $vdival) $state["vdi"]=$oncol;
-  else $state["off"]=$oncol;
-
-  echo "<tr><td class='section' colspan='6'>$location</td></tr><tr>";
-
-  echo "<td><button class='btn {$state['off']}' name='dmx$dmxnum' value='$offval'>Off</button></td>";
-  echo "<td><button class='btn {$state['vdi']}' name='dmx$dmxnum' value='$vdival'>VDim</button></td>";
-  echo "<td><button class='btn {$state['dim']}' name='dmx$dmxnum' value='$dimval'>Dim</button></td>";
-  echo "<td><button class='btn {$state['mid']}' name='dmx$dmxnum' value='$midval'>Mid</button></td>";
-  echo "<td><button class='btn {$state['bri']}' name='dmx$dmxnum' value='$brival'>Bright</button></td>";
-  echo "<td><button class='btn {$state['ful']}' name='dmx$dmxnum' value='$fulval'>Full</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$offval'>Off</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$vdival'>VDim</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$dimval'>Dim</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$midval'>Mid</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$brival'>Bright</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='dmx$dmxnum' value='$fulval'>Full</button></td>";
 
   echo "</tr>";
 }
@@ -109,55 +59,26 @@ function lightbuttons($dmxnum,$location){
 function buttons($pokenum,$location){
   global $oncol,$offcol,$hash;
 
-  $curval = isset($hash["out$pokenum"]) ? rtrim($hash["out$pokenum"]) : 0;
+  echo "<tr><td><h2>$location</h2></td>";
 
-  $off=$offcol; 
-  $on=$offcol;
-
-  if ($curval=="1") $on=$oncol;
-  else $off=$oncol;
-
-  echo "<tr><td class='section' colspan='2'>$location</td></tr><tr>";
-
-  echo "<td><button class='btn $off' name='out$pokenum' value='0'>Off</button></td>";
-  echo "<td><button class='btn $on' name='out$pokenum' value='1'>On</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='out$pokenum' value='0'>Off</button></td>";
+  echo "<td><button style='background:$offcol;width:100px;height:80px' name='out$pokenum' value='1'>On</button></td>";
 
   echo "</tr>";
 }
 
-/* Lights */
+/* Devices */
 lightbuttons("3","Front Porch");
 lightbuttons("5","Hallway");
-lightbuttons("7","Front Room");
-lightbuttons("1","Lounge");
-lightbuttons("21","Dining");
-lightbuttons("19","Kitchen");
 
-/* Switches */
 buttons("201","Cellar");
-buttons("5","Heating");
 
-/* Themes */
-echo "<tr><td class='section' colspan='4'>Themes</td></tr><tr>";
-foreach(["off","morning","evening","night"] as $t){
-    echo "<td><button class='btn' name='theme' value='$t'>$t</button></td>";
-}
-echo "</tr>";
-
+/* ✅ CLOSE FORM PROPERLY */
 echo "</table>";
 echo "</form>";
 
-/* Navigation */
-echo "<br><table><tr>";
-foreach([
-"porch.php"=>"Porch",
-"lounge.php"=>"Lounge",
-"kitchen.php"=>"Kitchen",
-"hallway.php"=>"Hallway",
-"landing.php"=>"Landing",
-"toplanding.php"=>"Top Landing"
-] as $link=>$name){
-    echo "<td><button class='navbtn' onclick=\"locationt-size:22px;'>Temperature: $gtemp °C</p>";
+echo "Temp: $gtemp °C";
+
 ?>
 
 </body>
