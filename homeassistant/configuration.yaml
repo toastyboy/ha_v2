@@ -1,0 +1,972 @@
+
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+ 
+rest_command:
+  my_ha_request:
+    url: http://192.168.100.120/varshare/varstore.php
+    method: POST
+    payload: "varname={{ varname }}&value={{ value }}&action=send"
+    content_type:  'application/x-www-form-urlencoded'
+
+
+sensor:
+  - platform: rest
+    name: vals
+    resource: http://192.168.100.120/varshare/varshowjson.php
+    scan_interval: 1
+    json_attributes:
+      - arduino_www_garagepink
+      - batt_current
+      - batt_percentage
+      - batt_temp
+      - batt_voltage
+      - blackload
+      - blackping
+      - blackprocs
+      - blacksddisk
+      - blacktemp
+      - blackuptime
+      - blueload
+      - blueping
+      - blueprocs
+      - bluesddisk
+      - bluetemp
+      - blueuptime
+      - butlerload
+      - butlerping
+      - butlerprocs
+      - butlerrx
+      - butlersddisk
+      - butlertemp
+      - butlertx
+      - butleruptime
+      - clearload
+      - clearping
+      - clearprocs
+      - clearsddisk
+      - cleartemp
+      - clearuptime
+      - dark
+      - darkval
+      - dmx1
+      - dmx10
+      - dmx11
+      - dmx12
+      - dmx13
+      - dmx14
+      - dmx15
+      - dmx16
+      - dmx17
+      - dmx18
+      - dmx19
+      - dmx2
+      - dmx20
+      - dmx21
+      - dmx22
+      - dmx23
+      - dmx24
+      - dmx3
+      - dmx4
+      - dmx5
+      - dmx6
+      - dmx7
+      - dmx8
+      - dmx9
+      - dmx_pink_lastran
+      - dmx_prod_nas2
+      - dmx_prod_pink
+      - elec_1hour
+      - elec_1min
+      - elec_5min
+      - elec_5sec
+      - elec_meter
+      - elec_meter_clear
+      - elec_meter_o
+      - elec_meter_solar
+      - gen_day_meter
+      - day_meter
+      - emailsend
+      - evtest_daemon_keypad
+      - frontdoorbell
+      - gal01
+      - gal02
+      - gal03
+      - gal04
+      - gal05
+      - gal06
+      - gal07
+      - gal08
+      - gal11
+      - gal12
+      - gal13
+      - gal14
+      - gal15
+      - gal16
+      - gal17
+      - gal18
+      - gal21
+      - gal22
+      - gal23
+      - gal24
+      - gal25
+      - gal26
+      - gal27
+      - gal28
+      - gal31
+      - gal32
+      - gal33
+      - gal34
+      - gal35
+      - gal36
+      - gal37
+      - gal38
+      - gal41
+      - gal42
+      - gal43
+      - gal44
+      - gal45
+      - gal46
+      - gal47
+      - gal48
+      - gal51
+      - gal52
+      - gal53
+      - gal54
+      - gal55
+      - gal56
+      - gal57
+      - gal58
+      - galaxy_black
+      - galaxy_black_lastran
+      - garagealarm
+      - garagebackdoorlock
+      - garagepinkload
+      - garagepinkping
+      - garagepinkprocs
+      - garagepinksddisk
+      - garagepinktemp
+      - garagepinkuptime
+      - garageuandolocks
+      - garfire
+      - gen_elec_1hour
+      - gen_elec_1min
+      - gen_elec_5sec
+      - gen_elec_meter
+      - heatdelta1800
+      - heatdelta300
+      - heatdelta3600
+      - heatdelta60
+      - heatdelta600
+      - heatdelta900
+      - in1
+      - in10
+      - in11
+      - in12
+      - in13
+      - in14
+      - in15
+      - in16
+      - in2
+      - in3
+      - in4
+      - in5
+      - in6
+      - in7
+      - in8
+      - in9
+      - keypadload
+      - keypadprocs
+      - keypadsddisk
+      - keypadtemp
+      - keypaduptime
+      - logfilestuff_nas
+      - logfilestuff_nas2
+      - logfilestuff_nas_lastran
+      - logic_nas
+      - logic_nas2
+      - logic_nas_lastran
+      - mppt1_chargecurrent
+      - mppt1_chargevolts
+      - mppt1_solarpower
+      - mppt1_solarvolts
+      - mppt2_chargecurrent
+      - mppt2_chargevolts
+      - mppt2_solarpower
+      - mppt2_solarvolts
+      - nas2load
+      - nas2procs
+      - nas2rx
+      - nas2sddisk
+      - nas2temp
+      - nas2tx
+      - nas2uptime
+      - nasload
+      - nasping
+      - nasprocs
+      - nassddisk
+      - nastemp
+      - nasuptime
+      - out1
+      - out10
+      - out100
+      - out101
+      - out102
+      - out103
+      - out104
+      - out105
+      - out106
+      - out107
+      - out108
+      - out11
+      - out110
+      - out111
+      - out112
+      - out113
+      - out114
+      - out115
+      - out116
+      - out117
+      - out118
+      - out119
+      - out12
+      - out120
+      - out121
+      - out122
+      - out123
+      - out124
+      - out125
+      - out13
+      - out130
+      - out131
+      - out132
+      - out133
+      - out134
+      - out135
+      - out136
+      - out137
+      - out14
+      - out140
+      - out15
+      - out150
+      - out151
+      - out152
+      - out153
+      - out154
+      - out155
+      - out156
+      - out157
+      - out16
+      - out17
+      - out18
+      - out19
+      - out2
+      - out20
+      - out201
+      - out202
+      - out21
+      - out22
+      - out23
+      - out24
+      - out25
+      - out26
+      - out27
+      - out28
+      - out29
+      - out3
+      - out30
+      - out300
+      - out301
+      - out302
+      - out303
+      - out304
+      - out31
+      - out32
+      - out37
+      - out4
+      - out5
+      - out6
+      - out60
+      - out61
+      - out62
+      - out7
+      - out8
+      - out9
+      - out90
+      - out91
+      - out92
+      - out93
+      - out94
+      - out95
+      - pin
+      - pinkload
+      - pinkping
+      - pinkprocs
+      - pinksddisk
+      - pinktemp
+      - pinkuptime
+      - pizeroload
+      - pizeroping
+      - pizeroprocs
+      - pizerosddisk
+      - pizerotemp
+      - pizerouptime
+      - pokeys_in_butler
+      - pokeys_in_butler_lastran
+      - pokeys_out_blue
+      - pokeys_out_blue_lastran
+      - process_blue
+      - process_butler
+      - process_clear
+      - process_garagepink
+      - process_keypad
+      - process_nas
+      - process_nas2
+      - process_pink
+      - process_pizero
+      - process_shed
+      - process_smshost
+      - process_solar
+      - python_keypad_keypad
+      - relhumid
+      - sheddoor
+      - solarload
+      - solarprocs
+      - solarrx
+      - solarsddisk
+      - solartemp
+      - solartx
+      - solaruptime
+      - solar_kwhday
+      - solar_kwhtot
+      - solar_hz
+      - solar_kwatts
+      - solar_watts
+      - solar_vac
+      - solar_temp
+      - speedtest_butler
+      - tankheatkj
+      - tankheatkwh
+      - tc35sms
+      - temp1
+      - temp10
+      - temp2
+      - temp3
+      - temp4
+      - temp5
+      - temp51
+      - temp52
+      - temp53
+      - temp54
+      - temp6
+      - temp61
+      - temp62
+      - temp7
+      - temp71
+      - temp72
+      - temp8
+      - temp9
+      - temp11
+      - temp12
+      - temp13
+      - temp14
+      - temp15
+      - temp16
+      - temp17
+      - temp18
+      - temp19
+      - temp20
+      - temps_black
+      - temps_clear
+      - temps_pizero
+      - theme
+      - update_meter_clear
+      - update_meter_solar
+      - vitals_black
+      - vitals_blue
+      - vitals_butler
+      - vitals_clear
+      - vitals_garagepink
+      - vitals_keypad
+      - vitals_nas
+      - vitals_nas2
+      - vitals_pink
+      - vitals_pizero
+      - vitals_solar
+
+    value_template: "OK"
+  - platform: template
+    sensors:
+
+
+      tank2_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp1')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"    
+      tankflow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp10')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"   
+      tank7_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp2')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C" 
+      tank6_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp3')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C" 
+      tank3_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp4')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"             
+      tank5_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp5')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C" 
+      basement_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp51')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      groundfloor_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp52')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      firstfloor_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp53')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      secondfloor_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp54')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      tanktop8_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp6')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      shedinternal_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp61')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      shedexternal_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp62')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"         
+      tankbottom1_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp7')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C" 
+      kensgym_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp71')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"                 
+      garageexternal_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp72')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      tank4_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp8')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      heatexchanger_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp9')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      thermalstorereturn_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp11')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      chbflow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp12')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      chgflow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp13')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      ch1flow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp14')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      ch2flow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp15')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      ufhflow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp16')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      boiler1flow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp17')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      boiler2flow_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp18')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      outgoingdhw_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp19')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      incomingcold_temperature:
+        value_template: "{{ state_attr('sensor.vals', 'temp20')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+      light_backlounge_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx1')['value'] }}"
+      light_frontoutside_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx10')['value'] }}"
+      light_masterbedroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx11')['value'] }}"        
+      light_bellabedroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx12')['value'] }}"        
+      light_emilybedroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx13')['value'] }}"        
+      light_joshbedroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx14')['value'] }}"        
+      light_toplanding_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx15')['value'] }}"        
+      light_nc1_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx16')['value'] }}"        
+      light_nc2_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx17')['value'] }}"        
+      light_kitchenworktop_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx18')['value'] }}"        
+      light_kitchentrack_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx19')['value'] }}"        
+      light_nc3_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx2')['value'] }}"        
+      light_diningroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx20')['value'] }}"        
+      light_nc4_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx21')['value'] }}"        
+      light_nc5_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx22')['value'] }}"        
+      light_nc6_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx23')['value'] }}"        
+      light_nc7_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx24')['value'] }}"        
+      light_frontporch_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx3')['value'] }}"        
+      light_towelrail_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx4')['value'] }}"        
+      light_hallway_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx5')['value'] }}"        
+      light_sparebedroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx6')['value'] }}"        
+      light_frontlounge_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx7')['value'] }}"        
+      light_bathroom_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx8')['value'] }}"        
+      light_landing_dmx:
+        value_template: "{{ state_attr('sensor.vals', 'dmx9')['value'] }}"
+
+      garagemiddledoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal01')['value'] }}"
+
+      garagebigdoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal02')['value'] }}"
+
+      garagemiddleuodoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal03')['value'] }}"
+
+      garagebiguodoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal04')['value'] }}"
+      garagesmalldoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal05')['value'] }}"
+      garagereceptionpir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal06')['value'] }}"
+      garagebackdoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal07')['value'] }}"
+      kensgympir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal08')['value'] }}"
+      summerhousepir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal11')['value'] }}"
+      summerhouseviper_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal12')['value'] }}"
+      summerhousedoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal13')['value'] }}"
+      summerhousespare_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal14')['value'] }}"
+      garagespare1_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal15')['value'] }}"
+      garagespare2_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal16')['value'] }}"
+      garagespare3_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal17')['value'] }}"
+      garagespare4_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal18')['value'] }}"
+      plantroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal21')['value'] }}"
+
+      plantroomfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal22')['value'] }}"
+      cellarbackdoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal23')['value'] }}"
+
+      cellarpassagepir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal24')['value'] }}"
+      backloungefire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal25')['value'] }}"
+      frontdoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal26')['value'] }}"
+      frontloungepir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal27')['value'] }}"
+      kitchenfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal28')['value'] }}"
+      masterbedroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal31')['value'] }}"
+      masterbedroomfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal32')['value'] }}"
+      bellabedroomfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal33')['value'] }}"
+      sparebedroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal34')['value'] }}"
+      joshbedroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal35')['value'] }}"
+
+      backloungepir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal36')['value'] }}"
+      biggaragepir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal37')['value'] }}"
+      biggarageuodoorviper_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal38')['value'] }}"
+      hallwayfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal41')['value'] }}"
+      bellabedroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal42')['value'] }}"
+      diningroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal43')['value'] }}"
+      emilybedroompir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal44')['value'] }}"
+      emilybedroomfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal45')['value'] }}"
+      toplandingpir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal46')['value'] }}"
+      cellarreceptionpir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal47')['value'] }}"
+      cellarinternaldoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal48')['value'] }}"
+      landingfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal51')['value'] }}"
+      firstlandingfire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal52')['value'] }}"
+      backdoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal53')['value'] }}"
+      dungeonviper_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal54')['value'] }}"
+      dungeondoor_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal55')['value'] }}"
+      sidegate_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal56')['value'] }}"
+      frontloungefire_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal57')['value'] }}"
+      landingpir_gal:
+        value_template: "{{ state_attr('sensor.vals', 'gal58')['value'] }}"
+      shed_door:
+        value_template: "{{ state_attr('sensor.vals', 'sheddoor')['value'] }}"
+      front_door_bell:
+        value_template: "{{ state_attr('sensor.vals', 'frontdoorbell')['value'] }}"
+      genelec1hr_power:
+        value_template: "{{ state_attr('sensor.vals', 'gen_elec_1hour')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+
+
+      mppt1_solarpower:
+        value_template: "{{ state_attr('sensor.vals', 'mppt1_solarpower')['value'] }}"
+        device_class: power
+        unit_of_measurement: "W"
+
+      mppt1_solarvolts:
+        value_template: "{{ state_attr('sensor.vals', 'mppt1_solarvolts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "V"
+
+      mppt1_chargecurrent:
+        value_template: "{{ state_attr('sensor.vals', 'mppt1_chargecurrent')['value'] }}"
+        device_class: power
+        unit_of_measurement: "A"
+
+      mppt1_chargevolts:
+        value_template: "{{ state_attr('sensor.vals', 'mppt1_chargevolts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "V"
+
+      mppt2_solarpower:
+        value_template: "{{ state_attr('sensor.vals', 'mppt2_solarpower')['value'] }}"
+        device_class: power
+        unit_of_measurement: "W"
+
+      mppt2_solarvolts:
+        value_template: "{{ state_attr('sensor.vals', 'mppt2_solarvolts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "V"
+
+      mppt2_chargecurrent:
+        value_template: "{{ state_attr('sensor.vals', 'mppt2_chargecurrent')['value'] }}"
+        device_class: power
+        unit_of_measurement: "A"
+
+      mppt2_chargevolts:
+        value_template: "{{ state_attr('sensor.vals', 'mppt2_chargevolts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "V"
+
+      batt_voltage:
+        value_template: "{{ state_attr('sensor.vals', 'batt_voltage')['value'] }}"
+        device_class: power
+        unit_of_measurement: "V"
+
+      batt_current:
+        value_template: "{{ state_attr('sensor.vals', 'batt_current')['value'] }}"
+        device_class: power
+        unit_of_measurement: "A"
+
+      batt_percentage:
+        value_template: "{{ state_attr('sensor.vals', 'batt_percentage')['value'] }}"
+        device_class: power
+        unit_of_measurement: "%"
+
+      batt_temp:
+        value_template: "{{ state_attr('sensor.vals', 'batt_temp')['value'] }}"
+        device_class: temperature
+        unit_of_measurement: "°C"
+
+      relhumid:
+        value_template: "{{ state_attr('sensor.vals', 'relhumid')['value'] }}"
+        device_class: humidity
+        unit_of_measurement: "%"
+      genelec1min_power:
+        value_template: "{{ state_attr('sensor.vals', 'gen_elec_1min')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+      genelec5sec_power:
+        value_template: "{{ state_attr('sensor.vals', 'gen_elec_5sec')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+      solar_kwatts:
+        value_template: "{{ state_attr('sensor.vals', 'solar_kwatts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+
+      solar_watts:
+        value_template: "{{ state_attr('sensor.vals', 'solar_watts')['value'] }}"
+        device_class: power
+        unit_of_measurement: "W"
+      elec1hr_power:
+        value_template: "{{ state_attr('sensor.vals', 'elec_1hour')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      elec1min_power:
+        value_template: "{{ state_attr('sensor.vals', 'elec_1min')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      elec5min_power:
+        value_template: "{{ state_attr('sensor.vals', 'elec_5min')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      elec5sec_power:
+        value_template: "{{ state_attr('sensor.vals', 'elec_5sec')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW" 
+      tankheatdelta30min_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta1800')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      tankheatdelta5min_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta300')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      tankheatdelta1hr_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta3600')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"        
+      tankheatdelta1min_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta60')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"                
+      tankheatdelta10min_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta600')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+      tankheatdelta15min_power:
+        value_template: "{{ state_attr('sensor.vals', 'heatdelta900')['value'] }}"
+        device_class: power
+        unit_of_measurement: "kW"
+      tank_energy:
+        value_template: "{{ state_attr('sensor.vals', 'tankheatkwh')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      gen_elec_day_energy:
+        value_template: "{{ state_attr('sensor.vals', 'gen_day_meter')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      elec_day_energy:
+        value_template: "{{ state_attr('sensor.vals', 'day_meter')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+
+      elec_meter:
+        value_template: "{{ state_attr('sensor.vals', 'elec_meter')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      elec_meter_o:
+        value_template: "{{ state_attr('sensor.vals', 'elec_meter_o')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      gen_elec_meter:
+        value_template: "{{ state_attr('sensor.vals', 'gen_elec_meter')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      solar_kwhtot:
+        value_template: "{{ state_attr('sensor.vals', 'solar_kwhtot')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      solar_kwhday:
+        value_template: "{{ state_attr('sensor.vals', 'solar_kwhday')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "kWh"
+      solar_vac:
+        value_template: "{{ state_attr('sensor.vals', 'solar_vac')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "V"
+      solar_hz:
+        value_template: "{{ state_attr('sensor.vals', 'solar_hz')['value'] }}"
+        device_class: energy
+        unit_of_measurement: "Hz"
+
+
+
+      in1_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in1')['value'] }}"
+      in2_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in2')['value'] }}"
+      in3_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in3')['value'] }}"
+      in4_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in4')['value'] }}"
+      in5_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in5')['value'] }}"
+
+      in6_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in6')['value'] }}"
+      in7_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in7')['value'] }}"
+      in8_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in8')['value'] }}"
+      in9_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in9')['value'] }}"
+      in10_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in10')['value'] }}"
+      in11_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in11')['value'] }}"
+      in12_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in12')['value'] }}"
+      in13_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in13')['value'] }}"
+      in14_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in14')['value'] }}"
+      in15_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in15')['value'] }}"
+      in16_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'in16')['value'] }}"
+      pokeys_in_butler_lastran:
+        value_template: "{{ state_attr('sensor.vals', 'pokeys_in_butler_lastran')['value'] }}"
+
+
+      out1_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out1')['value'] }}"
+      out2_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out2')['value'] }}"
+      out3_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out3')['value'] }}"
+      out4_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out4')['value'] }}"
+      out5_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out5')['value'] }}"
+      out6_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out6')['value'] }}"
+      out7_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out7')['value'] }}"
+      out8_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out8')['value'] }}"
+      out9_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out9')['value'] }}"
+      out10_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out10')['value'] }}"
+      out11_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out11')['value'] }}"
+      out12_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out12')['value'] }}"
+      out13_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out13')['value'] }}"
+      out14_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out14')['value'] }}"
+      out15_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out15')['value'] }}"
+      out16_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out16')['value'] }}"
+      out17_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out17')['value'] }}"
+      out18_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out18')['value'] }}"
+      out19_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out19')['value'] }}"
+      out20_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out20')['value'] }}"
+      out21_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out21')['value'] }}"
+      out22_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out22')['value'] }}"
+      out23_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out23')['value'] }}"
+      out24_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out24')['value'] }}"
+      out104_garmainlight:
+        value_template: "{{ state_attr('sensor.vals', 'out104')['value'] }}"
+      out105_garfloodrecept:
+        value_template: "{{ state_attr('sensor.vals', 'out105')['value'] }}"
+      out130_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out130')['value'] }}"
+      out131_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out131')['value'] }}"
+      out132_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out132')['value'] }}"
+      out133_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out133')['value'] }}"
+      out134_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out134')['value'] }}"
+      out135_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out135')['value'] }}"
+      out136_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out136')['value'] }}"
+      out137_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out137')['value'] }}"
+      out140_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out140')['value'] }}"
+      out201_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out201')['value'] }}"
+      out202_pokey:
+        value_template: "{{ state_attr('sensor.vals', 'out202')['value'] }}"
+
+      pokeys_out_blue_lastran:
+        value_template: "{{ state_attr('sensor.vals', 'pokeys_out_blue_lastran')['value'] }}"
+      darkval:
+        value_template: "{{ state_attr('sensor.vals', 'darkval')['value'] }}"
+        device_class: illuminance
+        unit_of_measurement: ""
+      garagealarm:
+        value_template: "{{ state_attr('sensor.vals', 'garagealarm')['value'] }}"
+      garagebackdoorlock:
+        value_template: "{{ state_attr('sensor.vals', 'garagebackdoorlock')['value'] }}"
+      garageuandolocks:
+        value_template: "{{ state_attr('sensor.vals', 'garageuandolocks')['value'] }}"
